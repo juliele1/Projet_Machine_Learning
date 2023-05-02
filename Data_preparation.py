@@ -38,9 +38,15 @@ merged_X_Y = pd.merge(data_x, data_y, on='ID', how='inner')
 
 # triage des données
 merged_X_Y = merged_X_Y.sort_values(by=['DAY_ID', 'COUNTRY'])
-
 print(merged_X_Y)
 
+# création de deux datas pour la France et l'Allemagne
 data_FR = merged_X_Y.loc[merged_X_Y['COUNTRY'] == 'FR']
 data_DE = merged_X_Y.loc[merged_X_Y['COUNTRY'] == 'DE']
 
+# triage des deux datas avec leurs valeurs correspondantes
+data_FR = data_FR.filter(regex='FR|GAS_RET|COAL_RET', axis=1)
+print(data_FR)
+
+data_DE = data_DE.filter(regex='DE|GAS_RET|COAL_RET', axis=1)
+print(data_DE)
