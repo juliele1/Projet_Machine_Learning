@@ -40,3 +40,7 @@ merged_X_Y = pd.merge(data_x, data_y, on='ID', how='inner')
 merged_X_Y = merged_X_Y.sort_values(by=['DAY_ID', 'COUNTRY'])
 
 print(merged_X_Y)
+
+data_FR = merged_X_Y.loc[merged_X_Y['COUNTRY'] == 'FR']
+data_DE = merged_X_Y.loc[merged_X_Y['COUNTRY'] == 'DE']
+
