@@ -36,3 +36,5 @@ merged_X_Y = pd.merge(data_x, data_y, on='ID', how='inner')
 
 print(merged_X_Y)
 
+merged_X_Y = merged_X_Y.sort_values(by=['DAY_ID', 'COUNTRY'])
+
