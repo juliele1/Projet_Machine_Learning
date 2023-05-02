@@ -27,8 +27,8 @@ print(data_x.loc[:,'DE_RAIN'])
 df.loc[:,'SalePrice']
 
 """
+for col in data_x.columns[data_x.isnull().any()]:
+    data_x[col].fillna(data_x[col].mean(), inplace=True)
 
-data_x = data_x.fillna(data_x.mean())
 print(data_x)
 
-#%%
