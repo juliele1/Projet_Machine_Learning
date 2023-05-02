@@ -18,7 +18,6 @@ data_new_x.dropna(inplace=True)
 print(data_x)
 print(data_new_x)
 
-"""
 
 # On remplace les valeurs manquantes par des 0.0
 
@@ -27,3 +26,9 @@ print(data_x.isnull())
 print(data_x.loc[:,'DE_RAIN'])
 df.loc[:,'SalePrice']
 
+"""
+
+data_x = data_x.fillna(data_x.mean())
+print(data_x)
+
+#%%
