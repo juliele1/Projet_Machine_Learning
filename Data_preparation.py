@@ -32,3 +32,7 @@ for col in data_x.columns[data_x.isnull().any()]:
 
 print(data_x)
 
+merged_X_Y = pd.merge(data_x, data_y, on='ID', how='inner')
+
+print(merged_X_Y)
+
