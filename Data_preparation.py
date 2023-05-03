@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 data_x = pd.read_csv('Data_X.csv')
 data_y = pd.read_csv('Data_Y.csv')
@@ -45,14 +47,34 @@ data_FR = merged_X_Y.loc[merged_X_Y['COUNTRY'] == 'FR']
 data_DE = merged_X_Y.loc[merged_X_Y['COUNTRY'] == 'DE']
 
 # triage des deux datas avec leurs valeurs correspondantes
-data_FR = data_FR.filter(regex='FR|GAS_RET|COAL_RET', axis=1)
+data_FR = data_FR.filter(regex='FR|GAS_RET|COAL_RET|TARGET', axis=1)
 print(data_FR)
 
-data_DE = data_DE.filter(regex='DE|GAS_RET|COAL_RET', axis=1)
+data_DE = data_DE.filter(regex='DE|GAS_RET|COAL_RET|TARGET', axis=1)
 print(data_DE)
 
 # affiche le type de chaque colonnes et si elles sont nulles ou non
-data_x.info()
+data_FR.info()
+data_DE.info()
 
 # affiche la distribution, la plage de valeurs et la signification de chaque colonne
-data_x.describe()
+data_FR.describe()
+data_DE.describe()
+
+DATA_FR = sns.load_dataset("Data_FR")
+
+#hist = data_FR['FR_CONSUMPTION'].hist()
+#print(plt.savefig("pandas_hist_01.png", bbox_inches='tight', dpi=100))
+#sns.histplot(data=DATA_FR, x='FR_CONSUMPTION')
+#plt.show()
+
+
+plt.figure(figsize=(19,23))
+for i, j in enumerate(data_FR.describe().columns):
+    plt.subplot(4, 2, i+1)
+    sns.distplot(x=data_FR[j])
+    plt.xlabel(j)
+    plt.title('{} Distribution'.format(j))
+    # plt.subplots_adjust(wspace=.2, hspace=.5)
+    plt.tight_layout()
+plt.show()
