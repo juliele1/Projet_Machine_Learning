@@ -50,3 +50,9 @@ print(data_FR)
 
 data_DE = data_DE.filter(regex='DE|GAS_RET|COAL_RET', axis=1)
 print(data_DE)
+
+# affiche le type de chaque colonnes et si elles sont nulles ou non
+data_x.info()
+
+# affiche la distribution, la plage de valeurs et la signification de chaque colonne
+data_x.describe()
