@@ -68,6 +68,7 @@ data_DE.describe()
 #sns.histplot(data=DATA_FR, x='FR_CONSUMPTION')
 #plt.show()
 
+"""
 plt.figure(figsize=(19, 23))
 for i, j in enumerate(data_FR.describe().columns):
     plt.subplot(4, 2, i+1)
@@ -76,4 +77,11 @@ for i, j in enumerate(data_FR.describe().columns):
     plt.title('{} Distribution'.format(j))
     # plt.subplots_adjust(wspace=.2, hspace=.5)
     plt.tight_layout()
+plt.show()
+"""
+sns.set(style="darkgrid")
+Data_X = sns.load_dataset("Data_X")
+sns
+
+sns.histplot(data=Data_X, x="ID", kde=True)
 plt.show()
