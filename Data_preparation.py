@@ -2,33 +2,13 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg')
+
 
 data_x = pd.read_csv('Data_X.csv')
 data_y = pd.read_csv('Data_Y.csv')
 data_new_x = pd.read_csv('DataNew_X.csv')
-
-"""
-# Avant suppression des lignes ayant des valeurs nulles
-print(data_x)
-print(data_new_x)
-# Recherche des valeurs nulles
-print(data_x.isnull())
-print(data_new_x.isnull())
-# Suppression des lignes ayant des valeurs nulles
-data_x.dropna(inplace=True)
-data_new_x.dropna(inplace=True)
-print(data_x)
-print(data_new_x)
-
-
-# On remplace les valeurs manquantes par des 0.0
-
-#data_x = data_x.fillna(0.0)
-print(data_x.isnull())
-print(data_x.loc[:,'DE_RAIN'])
-df.loc[:,'SalePrice']
-
-"""
 
 # remplacement des valeurs null par la moyenne de la colonne
 for col in data_x.columns[data_x.isnull().any()]:
@@ -53,7 +33,7 @@ print(data_FR)
 data_DE = data_DE.filter(regex='DE|GAS_RET|COAL_RET|TARGET', axis=1)
 print(data_DE)
 
-# affiche le type de chaque colonnes et si elles sont nulles ou non
+# affiche le type de chaque colonne et si elles sont nulles ou non
 data_FR.info()
 data_DE.info()
 
@@ -61,13 +41,93 @@ data_DE.info()
 data_FR.describe()
 data_DE.describe()
 
-plt.figure(figsize=(19, 23))
-for i, j in enumerate(data_FR.describe().columns):
-    plt.subplots(2,9)
-    sns.displot(x=data_FR[j])
-    plt.xlabel(j)
-    plt.title('{} Distribution'.format(j))
-    # plt.subplots_adjust(wspace=.2, hspace=.5)
-    plt.tight_layout()
-    plt.show()
+# création des histogrammes
+fig, axes = plt.subplots(nrows=6, ncols=3, figsize=(8, 35))
+fig.subplots_adjust(hspace=0.5, wspace=0.3)
 
+for i, ax in enumerate(axes.flatten()):
+    if i < len(data_FR.describe().columns):
+        j = data_FR.describe().columns[i]
+        sns.histplot(data_FR[j], ax=ax)
+        ax.axvline(data_FR[j].mean(), color='y', linestyle='-', label='Mean')
+        ax.axvline(data_FR[j].median(), color='g', linestyle='-', label='Median')
+        ax.set_xlabel(j)
+        ax.set_title(f'{j} Distribution')
+        ax.legend()
+
+plt.tight_layout()
+plt.show(block=True)
+
+fig, axes = plt.subplots(nrows=6, ncols=3, figsize=(8, 35))
+fig.subplots_adjust(hspace=0.5, wspace=0.3)
+
+for i, ax in enumerate(axes.flatten()):
+    if i < len(data_DE.describe().columns):
+        j = data_DE.describe().columns[i]
+        sns.histplot(data_DE[j], ax=ax)
+        ax.axvline(data_DE[j].mean(), color='y', linestyle='-', label='Mean')
+        ax.axvline(data_DE[j].median(), color='g', linestyle='-', label='Median')
+        ax.set_xlabel(j)
+        ax.set_title(f'{j} Distribution')
+        ax.legend()
+
+plt.tight_layout()
+plt.show(block=True)
+
+# création de diagrammes en boîtes
+plt.figure(figsize=(8, 10))
+plt.subplots_adjust(hspace=0.5, wspace=0.3)
+
+for i, j in enumerate(data_FR.describe().columns):
+    plt.subplot(5, 4, i+1)
+    sns.boxplot(x=data_FR[j])
+    plt.title('{} Boxplot'.format(j))
+
+plt.tight_layout()
+plt.show()
+"""
+plt.figure(figsize=(8, 10))
+plt.subplots_adjust(hspace=0.5, wspace=0.3)
+
+for i, j in enumerate(data_DE.describe().columns):
+    plt.subplot(5, 4, i+1)
+    sns.boxplot(x=data_DE[j])
+    plt.title('{} Boxplot'.format(j))
+
+plt.tight_layout()
+plt.show()
+"""
+# création de diagrammes de dispersion
+fig, axes = plt.subplots(nrows=6, ncols=3, figsize=(12, 54))
+for i, j in enumerate(data_FR.describe().columns):
+    axes.flat[i].set_xlabel(j)
+    sns.scatterplot(x=data_FR[j], y=data_FR.TARGET, ax=axes.flat[i])
+    axes.flat[i].set_title(f'{j} Distribution')
+
+plt.tight_layout()
+plt.show(block=True)
+"""
+fig, axes = plt.subplots(nrows=6, ncols=3, figsize=(12, 54))
+for i, j in enumerate(data_DE.describe().columns):
+    axes.flat[i].set_xlabel(j)
+    sns.scatterplot(x=data_DE[j], y=data_DE.TARGET, ax=axes.flat[i])
+    axes.flat[i].set_title(f'{j} Distribution')
+
+plt.tight_layout()
+plt.show(block=True)
+"""
+# Calculer la matrice de corrélation
+correlation_metrics_1 = data_FR.corr()
+
+correlation_metrics_2 = data_DE.corr()
+
+# Créer la heatmap avec une taille plus grande, une police plus petite et une palette de couleurs adaptée
+fig1 = plt.figure(figsize=(40, 12))
+sns.heatmap(correlation_metrics_1, square=True, annot=True, annot_kws={"size": 8}, vmax=1, vmin=-1, cmap='coolwarm')
+plt.title('Correlation Between Variables', size=14)
+plt.show()
+
+fig2 = plt.figure(figsize=(40, 12))
+sns.heatmap(correlation_metrics_2, square=True, annot=True, annot_kws={"size": 8}, vmax=1, vmin=-1, cmap='coolwarm')
+plt.title('Correlation Between Variables', size=14)
+plt.show()
