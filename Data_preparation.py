@@ -61,15 +61,14 @@ data_DE.info()
 data_FR.describe()
 data_DE.describe()
 
-DATA_FR = sns.load_dataset("Data_FR")
+#DATA_FR = sns.load_dataset("Data_FR")
 
 #hist = data_FR['FR_CONSUMPTION'].hist()
 #print(plt.savefig("pandas_hist_01.png", bbox_inches='tight', dpi=100))
 #sns.histplot(data=DATA_FR, x='FR_CONSUMPTION')
 #plt.show()
 
-
-plt.figure(figsize=(19,23))
+plt.figure(figsize=(19, 23))
 for i, j in enumerate(data_FR.describe().columns):
     plt.subplot(4, 2, i+1)
     sns.distplot(x=data_FR[j])
