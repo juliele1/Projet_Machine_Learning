@@ -58,7 +58,7 @@ for i, ax in enumerate(axes.flatten()):
 plt.tight_layout()
 plt.show(block=True)
 
-fig, axes = plt.subplots(nrows=6, ncols=3, figsize=(8, 35))
+fig, axes = plt.subplots(nrows=5, ncols=4, figsize=(8, 30))
 fig.subplots_adjust(hspace=0.5, wspace=0.3)
 
 for i, ax in enumerate(axes.flatten()):
@@ -85,7 +85,7 @@ for i, j in enumerate(data_FR.describe().columns):
 
 plt.tight_layout()
 plt.show()
-"""
+
 plt.figure(figsize=(8, 10))
 plt.subplots_adjust(hspace=0.5, wspace=0.3)
 
@@ -96,8 +96,11 @@ for i, j in enumerate(data_DE.describe().columns):
 
 plt.tight_layout()
 plt.show()
-"""
+
+
 # création de diagrammes de dispersion
+print(data_DE.columns)
+print(data_FR.columns)
 fig, axes = plt.subplots(nrows=6, ncols=3, figsize=(12, 54))
 for i, j in enumerate(data_FR.describe().columns):
     axes.flat[i].set_xlabel(j)
@@ -106,8 +109,8 @@ for i, j in enumerate(data_FR.describe().columns):
 
 plt.tight_layout()
 plt.show(block=True)
-"""
-fig, axes = plt.subplots(nrows=6, ncols=3, figsize=(12, 54))
+
+fig, axes = plt.subplots(nrows=5, ncols=4, figsize=(12, 40))
 for i, j in enumerate(data_DE.describe().columns):
     axes.flat[i].set_xlabel(j)
     sns.scatterplot(x=data_DE[j], y=data_DE.TARGET, ax=axes.flat[i])
@@ -115,7 +118,7 @@ for i, j in enumerate(data_DE.describe().columns):
 
 plt.tight_layout()
 plt.show(block=True)
-"""
+
 # Calculer la matrice de corrélation
 correlation_metrics_1 = data_FR.corr()
 
