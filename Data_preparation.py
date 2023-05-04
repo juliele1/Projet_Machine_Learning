@@ -99,8 +99,6 @@ plt.show()
 
 
 # création de diagrammes de dispersion
-print(data_DE.columns)
-print(data_FR.columns)
 fig, axes = plt.subplots(nrows=6, ncols=3, figsize=(12, 54))
 for i, j in enumerate(data_FR.describe().columns):
     axes.flat[i].set_xlabel(j)
