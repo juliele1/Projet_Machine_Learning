@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib
@@ -96,7 +95,6 @@ for i, j in enumerate(data_DE.describe().columns):
 
 plt.tight_layout()
 plt.show()
-
 
 # création de diagrammes de dispersion
 fig, axes = plt.subplots(nrows=6, ncols=3, figsize=(12, 54))
