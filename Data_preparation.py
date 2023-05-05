@@ -102,6 +102,7 @@ for i, j in enumerate(data_FR.describe().columns):
     axes.flat[i].set_xlabel(j)
     sns.scatterplot(x=data_FR[j], y=data_FR.TARGET, ax=axes.flat[i])
     axes.flat[i].set_title(f'{j} Distribution')
+    sns.regplot(x=data_FR[j], y=data_FR.TARGET, ax=axes.flat[i], line_kws={"color": "red"})
 
 plt.tight_layout()
 plt.show(block=True)
@@ -111,6 +112,7 @@ for i, j in enumerate(data_DE.describe().columns):
     axes.flat[i].set_xlabel(j)
     sns.scatterplot(x=data_DE[j], y=data_DE.TARGET, ax=axes.flat[i])
     axes.flat[i].set_title(f'{j} Distribution')
+    sns.regplot(x=data_DE[j], y=data_DE.TARGET, ax=axes.flat[i], line_kws={"color": "red"})
 
 plt.tight_layout()
 plt.show(block=True)
@@ -130,3 +132,5 @@ fig2 = plt.figure(figsize=(40, 12))
 sns.heatmap(correlation_metrics_2, square=True, annot=True, annot_kws={"size": 8}, vmax=1, vmin=-1, cmap='coolwarm')
 plt.title('Correlation Between Variables', size=14)
 plt.show()
+
+#%%
